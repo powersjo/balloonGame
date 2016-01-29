@@ -6,7 +6,7 @@
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
 	<RootNamespace></RootNamespace>
-	<ProjectGuid>{2D4050A3-CFA9-3AF5-849E-41ABA869481D}</ProjectGuid>
+	<ProjectGuid>{6A767445-802F-FE8D-A3B0-9F081BF25D01}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<AssemblyName>Assembly-CSharp</AssemblyName>
@@ -45,7 +45,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\MusicControl.cs" />
      <Compile Include="Assets\scripts\Balloon.cs" />
      <Compile Include="Assets\scripts\BalloonMiniLvl10.cs" />
      <Compile Include="Assets\scripts\Choose_lvl.cs" />
@@ -53,6 +52,7 @@
      <Compile Include="Assets\scripts\CountPopped.cs" />
      <Compile Include="Assets\scripts\Cycle_background.cs" />
      <Compile Include="Assets\scripts\Level10.cs" />
+     <Compile Include="Assets\scripts\MusicControl.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -130,13 +130,13 @@ public class CountPopped : MonoBehaviour {
 		}
 		if (missed + count == max) {
 			but.SetActive(true);
-            but01.SetActive(true);
             butExit.SetActive(true); //The exit button
             losePic.SetActive(true); //Balloons win
         } 
-        if (missed < count)
+        if (missed < count && missed + count == max) // level difficulty could be implemented here. 
         {
-            losePic.GetComponent<Image>().sprite = Resources.Load("win") as Sprite;
+            losePic.GetComponent<Image>().sprite =  Resources.Load<Sprite>("win");
+            but01.SetActive(true); // new level.
         }
 	}
 }
