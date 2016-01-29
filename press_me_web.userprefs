@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\GitHub\gvsu_capstone\Assets\cs_core\character\Playable.cs">
+    <Files>
+      <File FileName="..\GitHub\gvsu_capstone\Assets\cs_core\character\Playable.cs" Line="53" Column="14" />
+      <File FileName="..\GitHub\gvsu_capstone\Assets\cs_core\character\Character.cs" Line="15" Column="24" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
