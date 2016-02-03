@@ -22,7 +22,7 @@ public class Level10 : MonoBehaviour
         mini = false;
         posx = offset = 0;
         posy = speed = 2;
-        health = 20;
+        health = 25;
         userHealthColor = Color.green;
         screenW = Screen.width;
         screenH = Screen.height;
@@ -120,8 +120,8 @@ public class Level10 : MonoBehaviour
         float lasty, lastFloatx, lastFloaty;
         lastx = (int)this.transform.position.x;
         lasty = this.transform.position.y;
-        lastFloatx = this.transform.localScale.x / 2;
-        lastFloaty = this.transform.localScale.y / 2;
+        lastFloatx = this.transform.localScale.x / 4;
+        lastFloaty = this.transform.localScale.y / 4;
         GameObject clone1, clone2;
         clone1 = clone2 = new GameObject(); // I left off the clone1 and clone2 have the wrong y axis and don't move. 
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class BalloonMiniLvl10 : MonoBehaviour {
 
@@ -16,6 +17,17 @@ public class BalloonMiniLvl10 : MonoBehaviour {
         speed = UnityEngine.Random.Range(1.2F, 2.8F);
         posy = 8;
         pop = (AudioSource)gameObject.AddComponent<AudioSource>();
+        String[] balloonColors = new String[8];
+        balloonColors[0] = "Balloon/Blue";
+        balloonColors[1] = "Balloon/Green";
+        balloonColors[2] = "Balloon/Pink";
+        balloonColors[3] = "Balloon/Red";
+        balloonColors[4] = "Balloon/Yellow";
+        balloonColors[5] = "Balloon/Orange";
+        balloonColors[6] = "Balloon/Purple";
+        balloonColors[7] = "Balloon/Light-Blue";
+        this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(balloonColors[UnityEngine.Random.Range(0, 8)].ToString());
+        transform.localScale = new Vector3(this.transform.localScale.x / 2, this.transform.localScale.y / 2);
     }
     void OnMouseDown()
     {
