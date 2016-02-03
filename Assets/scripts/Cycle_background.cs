@@ -2,14 +2,15 @@
 using System.Collections;
 
 public class Cycle_background : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    private CountPopped other;
+    private GameObject go;
+    // Use this for initialization
+    void Start () {
         int planet = Random.Range(0, 1);
         int num = Random.Range(1, 12);
         string zero = "";
-        GameObject go = GameObject.Find("Master");
-        CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
+        go = GameObject.Find("Master");
+        other = (CountPopped)go.GetComponent(typeof(CountPopped));
         other.SetBackNum(num);
         if (num < 10)
         {

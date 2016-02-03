@@ -8,18 +8,19 @@ public class Level10 : MonoBehaviour
     float posx, posy, posz, speed, offset;
     int health;
     String[] balloonColors;
-    bool mini;
+    private bool mini, endGame;
     private GUIStyle currentStyle = new GUIStyle(GUI.skin.box);
     Texture2D healthUserTexture;
-    GameObject go;
+    private GameObject go;
     Color userHealthColor;
     int screenW, screenH;
+    private CountPopped other;
 
     // Use this for initialization
     void Start()
     {
         go = GameObject.Find("Master");
-        mini = false;
+        mini = endGame = false;
         posx = offset = 0;
         posy = speed = 2;
         health = 25;
@@ -179,11 +180,17 @@ public class Level10 : MonoBehaviour
                 Space.World);
             }
         //}
-        if (!mini)
+        if (this.transform.localScale.y > 5f)
+        {
+            endGame = true;
+            other = (CountPopped)go.GetComponent(typeof(CountPopped));
+            other.killUser();
+
+        }
+        if (!mini && !endGame)
         {
             this.transform.localScale = new Vector3(this.transform.localScale.x * (1.001F + offset), this.transform.localScale.y * (1.001F + offset), 1);
             this.transform.GetComponent<SphereCollider>().radius = this.transform.GetComponent<SphereCollider>().radius * (1.0002F + offset);
-            //float tempX = this.transform.localScale.x;
         }
     }
 }

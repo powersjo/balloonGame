@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Choose_lvl : MonoBehaviour {
 
@@ -9,11 +10,55 @@ public class Choose_lvl : MonoBehaviour {
 	
 	}
 	public void StartTheGame(){
-		Application.LoadLevel(1);
+        SceneManager.LoadScene(12);
 	}
+    public void Lvl1()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void Lvl2()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void Lvl3()
+    {
+        SceneManager.LoadScene(3);
+    }
+    public void Lvl4()
+    {
+        SceneManager.LoadScene(4);
+    }
+    public void Lvl5()
+    {
+        SceneManager.LoadScene(5);
+    }
+    public void Lvl6()
+    {
+        SceneManager.LoadScene(6);
+    }
+    public void Lvl7()
+    {
+        SceneManager.LoadScene(7);
+    }
+    public void Lvl8()
+    {
+        SceneManager.LoadScene(8);
+    }
+    public void Lvl9()
+    {
+        SceneManager.LoadScene(9);
+    }
+    public void Lvl10()
+    {
+        SceneManager.LoadScene(10);
+    }
+    public void Endless()
+    {
+        SceneManager.LoadScene(13);
+    }
     public void LastLevel()
     {
-        Application.LoadLevel(d);
+        SceneManager.LoadScene(d);
     }
     public void ExitGame()
     {
@@ -25,22 +70,22 @@ public class Choose_lvl : MonoBehaviour {
     }
     public void RestartLevel()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(Application.loadedLevel);
     }
     public void Options()
     {
-        Application.LoadLevel(11);
+        SceneManager.LoadScene(11);
         d = 0;
     }
 
     public void MainMenu()
     {
-        Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
         d = 0;
     }
     public void Specific_lvl()
     {
-        Application.LoadLevel(d);
+        SceneManager.LoadScene(d);
     }
 
     // Update is called once per frame
@@ -48,11 +93,11 @@ public class Choose_lvl : MonoBehaviour {
         if (Input.GetKeyDown("p"))
         {
             SetLastLevel(Application.loadedLevel);
-            Application.LoadLevel(11);
+            SceneManager.LoadScene(11);
         }
     }
     public void NextLevel()
     {
-        Application.LoadLevel(Application.loadedLevel + 1);
+        SceneManager.LoadScene(Application.loadedLevel + 1);
     }
 }

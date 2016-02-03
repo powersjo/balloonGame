@@ -10,18 +10,22 @@ public class CountPopped : MonoBehaviour {
     //private float timer;
     private double beginTime, timer;
 	public GameObject but, but01, butExit, losePic;
+    private GameObject go;
     private int max;
-    private bool hasPlanet;
+    private bool hasPlanet, fail, complete;
     private int backgroundNum, userHealth;
+    private Profile other;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        go = GameObject.Find("Master");
         beginTime = System.DateTime.Now.ToOADate();
 		timer = 0.0;
 		count = 0;
 		missed = 0;
         max = GetCurrentScene();
         start_click();
+        fail = complete = false;
         if(Application.loadedLevel == 10)
         {
             userHealth = 30;
@@ -39,7 +43,15 @@ public class CountPopped : MonoBehaviour {
 
     public void subUserHealth()
     {
-        userHealth--;
+        if (userHealth > 0)
+        {
+            userHealth--;
+        }
+    }
+    public void killUser()
+    {
+        userHealth = 0;
+        fail = true;
     }
 
     public double GetTimer()
@@ -128,13 +140,19 @@ public class CountPopped : MonoBehaviour {
 		if (missed < 1) {
 			missedText.text = "";
 		}
-		if (missed + count == max) {
+		if (missed + count == max || fail) {
 			but.SetActive(true);
             butExit.SetActive(true); //The exit button
             losePic.SetActive(true); //Balloons win
         } 
-        if (missed < count && missed + count == max) // level difficulty could be implemented here. 
+        if (missed < count && missed + count == max && !fail) // level difficulty could be implemented here. 
         {
+            other = (Profile)go.GetComponent(typeof(Profile));
+            if (!complete)
+            {
+                other.lvlComplete(Application.loadedLevel);
+                complete = true;
+            }
             losePic.GetComponent<Image>().sprite =  Resources.Load<Sprite>("win");
             but01.SetActive(true); // new level.
         }
