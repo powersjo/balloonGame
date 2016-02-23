@@ -9,7 +9,9 @@ public class Balloon : MonoBehaviour {
 	public AudioSource pop;
     private bool unclickable, armored, camo, duplicate, origonal;
     public bool move;
-    private GameObject clone1, clone2;
+    private GameObject clone1, clone2, clone;
+    public GameObject cloneMe;
+    private Animation anim;
 
     // Use this for initialization
     void Awake()
@@ -20,6 +22,14 @@ public class Balloon : MonoBehaviour {
     void Start() {
         unclickable = duplicate = false;
         posz = 0.0f;//UnityEngine.Random.Range(-0.2F, 0.5F);
+        cloneMe = Resources.Load<GameObject>("Rope") as GameObject; //problem
+        //cloneMe.AddComponent<Animator>();
+        //cloneMe.AddComponent<Animation>();
+        //anim = Resources.Load<Animation>("RopeAnimation") as Animation;
+        
+        
+        //anim.animation = Resources.Load<Animation>("RopeAnimation") as Animation;
+        //cloneMe.GetComponent<Animation>() = Resources.Load<Animation>("RopeAnimation") as Animation;
         armored = false;
         if (UnityEngine.Random.Range(0, (16 - Application.loadedLevel)) == 0 && Application.loadedLevel > 6)
         {
@@ -72,6 +82,17 @@ public class Balloon : MonoBehaviour {
             gameObject.GetComponent<Renderer>().material.color = new Color(1.5F, 1.5F, 1.5F, 1.0F);
 
         }
+
+        /*
+        * I dont think that I should use Instantiate. 
+        */
+
+        //clone.transform.localPosition = new Vector3(0, 0, 0);
+        //clone = (GameObject)Instantiate(cloneMe, new Vector3(this.transform.position.x + 2, this.transform.position.y - 3, 0), this.transform.rotation);
+        //clone = Instantiate(cloneMe, transform.position, transform.rotation) as GameObject;
+        //clone.transform.localPosition = new Vector3(0, 0, 0);
+        //clone.transform.parent = this.transform;
+        //clone.transform.localPosition = new Vector3(0, 0, 0); /////////////////////////////////// rope is almost working need to get to the right spot. 
     }
 
     int getBackgroundNum()
@@ -190,7 +211,7 @@ public class Balloon : MonoBehaviour {
             }
 		} else if (move == true){
 			//move towards the center of the world (or where ever you like)
-			Vector3 targetPosition = new Vector3 (posx, posy, posz);
+			Vector3 targetPosition = new Vector3 (posx, posy, 0.0f);
             Vector3 targetOffset = new Vector3(0,0,0);
 			Vector3 currentPosition = this.transform.position;
             if (Application.loadedLevel > 7)

@@ -62,6 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Seamless Texture\Demo Scene\TextureChanger.cs" />
+    <Compile Include="Assets\Seamless Texture\Demo Scene\rotateObject.cs" />
+    <Compile Include="Assets\Seamless Texture\Demo Scene\severalPositions.cs" />
+    <Compile Include="Assets\Seamless Texture\Demo Scene\webLoad.cs" />
     <Compile Include="Assets\scripts\Balloon.cs" />
     <Compile Include="Assets\scripts\BalloonMiniLvl10.cs" />
     <Compile Include="Assets\scripts\Choose_lvl.cs" />
