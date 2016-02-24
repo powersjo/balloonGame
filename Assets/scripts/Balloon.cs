@@ -83,15 +83,34 @@ public class Balloon : MonoBehaviour {
 
         }
 
-        /*
-        * I dont think that I should use Instantiate. 
-        */
+        clone = new GameObject();
+        clone.name = "String";
+        clone.transform.localPosition = new Vector3(0, 0, 0);
+        clone.transform.parent = this.transform;
+        //anim = Resources.Load<Animation>("RopeAnimation") as Animation;
+        //Animation ropeAnimation = clone.AddComponent<Animation>() as Animation;
+        Animator ropeAnimator = clone.AddComponent<Animator>() as Animator;
+        Animation ropeAnimation = clone.AddComponent<Animation>() as Animation;
+        //GameObject tempGO = Resources.Load("Rope") as GameObject;
+        ropeAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("RopeAnimator") as RuntimeAnimatorController;
+        ropeAnimation.clip = Resources.Load<AnimationClip>("RopeAnimation") as AnimationClip;
+        
+        /**
+        *   Next step is to make the animation correct. The animation is added correctly. 
+        **/
 
-        //clone.transform.localPosition = new Vector3(0, 0, 0);
-        //clone = (GameObject)Instantiate(cloneMe, new Vector3(this.transform.position.x + 2, this.transform.position.y - 3, 0), this.transform.rotation);
-        //clone = Instantiate(cloneMe, transform.position, transform.rotation) as GameObject;
-        //clone.transform.localPosition = new Vector3(0, 0, 0);
-        //clone.transform.parent = this.transform;
+        //clone.GetComponent<Animation>().Play();
+        //RuntimeAnimatorController RopeAnimator = clone.GetComponent<Animator>().GetComponent<RuntimeAnimatorController>();
+        //RopeAnimator = Resources.Load<RuntimeAnimatorController>("RopeAnimator") as RuntimeAnimatorController;
+        //clone.GetComponent<Animator>().GetComponent<RuntimeAnimatorController>().Equals(Resources.Load<RuntimeAnimatorController>("RopeAnimator") as RuntimeAnimatorController);
+        //RuntimeAnimatorController ropeAnimator = clone.GetComponent<Animator>();
+        //AnimationClip ropeClip = tempGO.animation.GetClip("animation");
+        //AnimationClip ropeClip = (AnimationClip)Resources.Load("RopeAnimation");
+        //ropeAnimation.AddClip(ropeClip, "ropeClip");
+        //ropeAnimation.Play(ropeAnimation.clip.name);
+        //ropeAnimation = clone.GetComponent<Animation>();
+        //ropeAnimation.AddClip((AnimationClip)Resources.Load("RopeAnimation"), "RopeAnimation");
+        //clone.GetComponent<Animation>().Play(clone.GetComponent<Animation>().clip.name);
         //clone.transform.localPosition = new Vector3(0, 0, 0); /////////////////////////////////// rope is almost working need to get to the right spot. 
     }
 
