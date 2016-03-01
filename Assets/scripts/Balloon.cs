@@ -222,13 +222,14 @@ public class Balloon : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
+
         if (time >= 0 && (clone1 == null || clone2 == null)) {
 			time -= Time.deltaTime;
             if (!origonal)
             {
                 time = -1F;
             }
-		} else if (move == true){
+        } else if (move == true){
 			//move towards the center of the world (or where ever you like)
 			Vector3 targetPosition = new Vector3 (posx, posy, 0.0f);
             Vector3 targetOffset = new Vector3(0,0,0);
