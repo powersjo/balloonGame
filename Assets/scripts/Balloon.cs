@@ -83,18 +83,25 @@ public class Balloon : MonoBehaviour {
 
         }
 
-        clone = new GameObject();
-        clone.name = "String";
-        clone.transform.localPosition = new Vector3(0, 0, 0);
-        clone.transform.parent = this.transform;
+        /***
+        * This fucking works! just need to not apply the animation to the whole ballon and just the string????
+        ***/
+
+        //clone = (GameObject)Instantiate(Resources.Load<GameObject>("String"), new Vector3(0, 0, 0), this.transform.rotation);
+        //clone = new GameObject();
+        //clone.name = "String";
+        //clone.transform.position = this.transform.position;
+        //clone.transform.localPosition = new Vector3(0, 0, 0);
+        //clone.transform.parent = this.transform;
+        //transform.localScale = transform.localScale;
         //anim = Resources.Load<Animation>("RopeAnimation") as Animation;
         //Animation ropeAnimation = clone.AddComponent<Animation>() as Animation;
-        Animator ropeAnimator = clone.AddComponent<Animator>() as Animator;
-        Animation ropeAnimation = clone.AddComponent<Animation>() as Animation;
+        //Animator ropeAnimator = clone.AddComponent<Animator>() as Animator;
+        //Animation ropeAnimation = clone.AddComponent<Animation>() as Animation;
         //GameObject tempGO = Resources.Load("Rope") as GameObject;
-        ropeAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("RopeAnimator") as RuntimeAnimatorController;
-        ropeAnimation.clip = Resources.Load<AnimationClip>("RopeAnimation") as AnimationClip;
-        
+        //ropeAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("RopeAnimator") as RuntimeAnimatorController;
+        //ropeAnimation.clip = Resources.Load<AnimationClip>("RopeAnimation") as AnimationClip;
+
         /**
         *   Next step is to make the animation correct. The animation is added correctly. 
         **/
@@ -222,7 +229,8 @@ public class Balloon : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-
+        // if (this.GetComponentInChildren(Animation)) { }
+        //transform.localScale = transform.localScale;
         if (time >= 0 && (clone1 == null || clone2 == null)) {
 			time -= Time.deltaTime;
             if (!origonal)
