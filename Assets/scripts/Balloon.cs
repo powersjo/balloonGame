@@ -163,9 +163,9 @@ public class Balloon : MonoBehaviour {
     void OnMouseDown()
     {
         armorCrack++;
+        GameObject go = GameObject.Find("Master");
+        CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
         if (!unclickable && !armored) { 
-            GameObject go = GameObject.Find("Master");
-            CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
             other.IncreaseCount();
             AudioClip myAudioClip;
             myAudioClip = (AudioClip)Resources.Load("Pop Banner");

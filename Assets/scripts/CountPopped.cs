@@ -5,15 +5,12 @@ using System;
 
 public class CountPopped : MonoBehaviour {
 
-	private int count, missed;
-	public Text countText, currentTime, missedText;
-    //private float timer;
+	private int count, missed, max, totalClicks, backgroundNum, userHealth;
+    public Text countText, currentTime, missedText, accuracyText;
     private double beginTime, timer;
-	public GameObject but, but01, butExit, losePic;
+	public GameObject but, but01, butExit, losePic, clickAccurate;
     private GameObject go;
-    private int max;
-    private bool hasPlanet, fail, complete;
-    private int backgroundNum, userHealth;
+    private bool hasPlanet, fail, complete, lockAccuracy;
     private Profile other;
 
     // Use this for initialization
@@ -21,11 +18,10 @@ public class CountPopped : MonoBehaviour {
         go = GameObject.Find("Master");
         beginTime = System.DateTime.Now.ToOADate();
 		timer = 0.0;
-		count = 0;
-		missed = 0;
+		count = missed = totalClicks = 0;
         max = GetCurrentScene();
         start_click();
-        fail = complete = false;
+        fail = complete = lockAccuracy = false;
         if(Application.loadedLevel == 10)
         {
             userHealth = 30;
@@ -90,14 +86,33 @@ public class CountPopped : MonoBehaviour {
 	void SetMissedText(){
 		missedText.text = "Missed: " + missed.ToString ();
 	}
-	public void IncreaseCount(){
+    void SetAccuracyText()
+    {
+        if (!lockAccuracy)
+        {
+            accuracyText.text = "Accuracy: " + GetAccuracy().ToString("0.00") + "%";
+            clickAccurate.SetActive(true); //Accuracy display
+            lockAccuracy = true;
+        }
+    }
+    public void IncreaseCount(){
 		count++;
 		SetCountText ();
 	}
+    private void IncreaseClicks()
+    {
+        totalClicks++;
+    }
 	public void IncreaseMissed(){
 		missed++;
 		SetMissedText ();
 	}
+    private float GetAccuracy()
+    {
+        float accurate = (float)count / (float)totalClicks;
+        //Debug.Log("Total " + totalClicks + " | Count " + count + " | Accuracy " + accurate);
+        return accurate * 100;
+    }
     System.Diagnostics.Stopwatch _sw = new System.Diagnostics.Stopwatch();
     private void start_click()
     {
@@ -131,9 +146,14 @@ public class CountPopped : MonoBehaviour {
         but01.SetActive(false); //Next level button
         butExit.SetActive(false); //The exit button
         losePic.SetActive(false); //Balloons win
+        clickAccurate.SetActive(false); //Click accuracy
     }
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetMouseButtonDown(0))
+        {
+            IncreaseClicks();
+        }
 		if((missed + count) != max){
             SetTime();
 		}
@@ -144,6 +164,7 @@ public class CountPopped : MonoBehaviour {
 			but.SetActive(true);
             butExit.SetActive(true); //The exit button
             losePic.SetActive(true); //Balloons win
+            SetAccuracyText();
         } 
         if (missed < count && missed + count == max && !fail) // level difficulty could be implemented here. 
         {
@@ -155,6 +176,7 @@ public class CountPopped : MonoBehaviour {
             }
             losePic.GetComponent<Image>().sprite =  Resources.Load<Sprite>("win");
             but01.SetActive(true); // new level.
+            SetAccuracyText();
         }
 	}
 }

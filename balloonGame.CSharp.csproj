@@ -70,6 +70,7 @@
     <Compile Include="Assets\scripts\CloudBehavior.cs" />
     <Compile Include="Assets\scripts\CountPopped.cs" />
     <Compile Include="Assets\scripts\Cycle_background.cs" />
+    <Compile Include="Assets\scripts\DummyBalloon.cs" />
     <Compile Include="Assets\scripts\HideLvls.cs" />
     <Compile Include="Assets\scripts\Level10.cs" />
     <Compile Include="Assets\scripts\MusicControl.cs" />
