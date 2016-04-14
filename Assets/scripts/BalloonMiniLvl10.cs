@@ -59,7 +59,7 @@ public class BalloonMiniLvl10 : MonoBehaviour {
         Vector3 targetPosition = new Vector3(posx, posy, posz);
         Vector3 targetOffset = new Vector3(0, 0, 0);
         Vector3 currentPosition = this.transform.position;
-        if (Application.loadedLevel > 7)
+        if (Application.loadedLevel > 8)
         {
             if (UnityEngine.Random.Range(0, (16 - Application.loadedLevel)) == 0)
             {

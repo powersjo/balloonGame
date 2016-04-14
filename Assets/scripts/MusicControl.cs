@@ -1,20 +1,58 @@
 ﻿using UnityEngine;
-using System.Collections;
+//using UnityEngine.SceneManagement;
+//using System.Collections;
 
 public class MusicControl : MonoBehaviour {
     //private AudioSource backgroudMusic;
+    //static bool AudioBegin = false;
+
+    private GameObject musicPlayer = GameObject.Find("MainMusic");
+    //private GameObject localMusicStatus = GameObject.Find("MusicChecker");
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+
+        if (musicPlayer == null)
+        {
+            musicPlayer = this.gameObject;
+            musicPlayer.name = "MainMusic";
+            //if (!AudioBegin)
+            //{
+            //AudioClip thisAudioClip;
+            //thisAudioClip = (AudioClip)Resources.Load("techno");
+            //musicPlayer.AddComponent<AudioSource>().PlayClipAtPoint(thisAudioClip, transform.position, 0.8F);
+            AudioSource musicSource = musicPlayer.AddComponent<AudioSource>();//.PlayClipAtPoint(thisAudioClip, transform.position, 0.8F);
+            musicSource.PlayOneShot((AudioClip)Resources.Load("techno"));
+            //AudioClip thisAudioClip = musicSource.GetComponent<AudioClip>();
+            //musicSource.PlayClipAtPoint(thisAudioClip, transform.position, 0.8F);
+            //SpriteRenderer balloonSR = gameObject.AddComponent<SpriteRenderer>();
+            //GetComponent<AudioSource>().Play();
+            //thisAudioClip = (AudioClip)Resources.Load("techno");
+           // thisAudioClip = musicPlayer.GetComponent<AudioSource>().GetComponent<AudioClip>();
+            //thisAudioClip = (AudioClip)Resources.Load("techno");
+
+            DontDestroyOnLoad(musicPlayer);
+                //AudioBegin = true;
+
+                // if (SceneManager.GetActiveScene().buildIndex != 0) { 
+                // DontDestroyOnLoad(gameObject);
+            //}
+        } else
+        {
+            if (this.gameObject.name != "MainMusic")
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
     void Start() {
-        //backgroudMusic = (AudioSource)gameObject.AddComponent<AudioSource>();
-        AudioClip thisAudioClip;
-        thisAudioClip = (AudioClip)Resources.Load("techno");
-        //backgroudMusic.clip = myAudioClip;
-        //backgroudMusic.volume = 0.05F;
-        AudioSource.PlayClipAtPoint(thisAudioClip, transform.position, 0.8F);
-        // backgroudMusic.Play();
+        /*if(localMusicStatus.GetComponent<MusicStarted>().GetMusicStatus() == 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            localMusicStatus.GetComponent<MusicStarted>().StartMusic();
+        }*/
     }
     void Update()
     {

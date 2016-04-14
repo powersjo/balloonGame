@@ -4,57 +4,57 @@ using UnityEngine.SceneManagement;
 
 public class Choose_lvl : MonoBehaviour {
 
-    int d;
+    public int d = 1;
 	// Use this for initialization
 	void Start () {
 	
 	}
 	public void StartTheGame(){
-        SceneManager.LoadScene(12);
+        SceneManager.LoadScene(13);
 	}
     public void Lvl1()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     public void Lvl2()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
     public void Lvl3()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
     public void Lvl4()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
     public void Lvl5()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(6);
     }
     public void Lvl6()
     {
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(7);
     }
     public void Lvl7()
     {
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene(8);
     }
     public void Lvl8()
     {
-        SceneManager.LoadScene(8);
+        SceneManager.LoadScene(9);
     }
     public void Lvl9()
     {
-        SceneManager.LoadScene(9);
+        SceneManager.LoadScene(10);
     }
     public void Lvl10()
     {
-        SceneManager.LoadScene(10);
+        SceneManager.LoadScene(11);
     }
     public void Endless()
     {
-        SceneManager.LoadScene(13);
+        SceneManager.LoadScene(14);
     }
     public void LastLevel()
     {
@@ -64,7 +64,7 @@ public class Choose_lvl : MonoBehaviour {
     {
         Application.Quit();
     }
-    private void SetLastLevel(int level)
+    public void SetLastLevel(int level)
     {
         d = level;
     }
@@ -74,14 +74,13 @@ public class Choose_lvl : MonoBehaviour {
     }
     public void Options()
     {
-        SceneManager.LoadScene(11);
-        d = 0;
+        SceneManager.LoadScene(12);
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(0);
-        d = 0;
+        SceneManager.LoadScene(1);
+        d = 1;
     }
     public void Specific_lvl()
     {

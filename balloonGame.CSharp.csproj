@@ -65,6 +65,7 @@
     <Compile Include="Assets\scripts\AnimationVary.cs" />
     <Compile Include="Assets\scripts\Balloon.cs" />
     <Compile Include="Assets\scripts\BalloonMiniLvl10.cs" />
+    <Compile Include="Assets\scripts\BeginGame.cs" />
     <Compile Include="Assets\scripts\ChangeDirection.cs" />
     <Compile Include="Assets\scripts\Choose_lvl.cs" />
     <Compile Include="Assets\scripts\CloudBehavior.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Assets\scripts\HideLvls.cs" />
     <Compile Include="Assets\scripts\Level10.cs" />
     <Compile Include="Assets\scripts\MusicControl.cs" />
+    <Compile Include="Assets\scripts\MusicStarted.cs" />
     <Compile Include="Assets\scripts\Profile.cs" />
   </ItemGroup>
   <ItemGroup>

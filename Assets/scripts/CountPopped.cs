@@ -22,7 +22,7 @@ public class CountPopped : MonoBehaviour {
         max = GetCurrentScene();
         start_click();
         fail = complete = lockAccuracy = false;
-        if(Application.loadedLevel == 10)
+        if(Application.loadedLevel == 11)
         {
             userHealth = 30;
         }
@@ -76,7 +76,7 @@ public class CountPopped : MonoBehaviour {
     }
     private int GetCurrentScene()
     {
-        max = 10 + (Application.loadedLevel * 5);
+        max = 10 + ((Application.loadedLevel - 1) * 5);
         //Debug.Log(max);
         return max;
     }

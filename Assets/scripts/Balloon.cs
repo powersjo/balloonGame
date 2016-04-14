@@ -31,11 +31,11 @@ public class Balloon : MonoBehaviour {
         //anim.animation = Resources.Load<Animation>("RopeAnimation") as Animation;
         //cloneMe.GetComponent<Animation>() = Resources.Load<Animation>("RopeAnimation") as Animation;
         armored = false;
-        if (UnityEngine.Random.Range(0, (16 - Application.loadedLevel)) == 0 && Application.loadedLevel > 6)
+        if (UnityEngine.Random.Range(0, (16 - Application.loadedLevel)) == 0 && Application.loadedLevel > 7)
         {
             armored = true;
         }
-        if (UnityEngine.Random.Range(0, (14 - Application.loadedLevel)) == 0 && Application.loadedLevel > 8)
+        if (UnityEngine.Random.Range(0, (14 - Application.loadedLevel)) == 0 && Application.loadedLevel > 9)
         {
             duplicate = true;
 

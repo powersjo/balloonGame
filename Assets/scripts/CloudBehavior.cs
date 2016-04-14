@@ -64,6 +64,4 @@ public class CloudBehavior : MonoBehaviour {
             //Debug.Log("Update else");
         }
     }
-
-
 }
