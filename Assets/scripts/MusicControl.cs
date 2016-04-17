@@ -1,69 +1,59 @@
 ﻿using UnityEngine;
-//using UnityEngine.SceneManagement;
-//using System.Collections;
 
 public class MusicControl : MonoBehaviour {
-    //private AudioSource backgroudMusic;
-    //static bool AudioBegin = false;
-
-    private GameObject musicPlayer = GameObject.Find("MainMusic");
-    //private GameObject localMusicStatus = GameObject.Find("MusicChecker");
+    public AudioClip thisAudioClip;
+    private AudioSource musicSource;
+    private bool flip = true;
+    private GameObject musicPlayer;
+    private string[] music;
     void Awake()
     {
+        musicPlayer = this.gameObject;
+        musicPlayer.name = "MainMusic";
 
-        if (musicPlayer == null)
-        {
-            musicPlayer = this.gameObject;
-            musicPlayer.name = "MainMusic";
-            //if (!AudioBegin)
-            //{
-            //AudioClip thisAudioClip;
-            //thisAudioClip = (AudioClip)Resources.Load("techno");
-            //musicPlayer.AddComponent<AudioSource>().PlayClipAtPoint(thisAudioClip, transform.position, 0.8F);
-            AudioSource musicSource = musicPlayer.AddComponent<AudioSource>();//.PlayClipAtPoint(thisAudioClip, transform.position, 0.8F);
-            musicSource.PlayOneShot((AudioClip)Resources.Load("techno"));
-            //AudioClip thisAudioClip = musicSource.GetComponent<AudioClip>();
-            //musicSource.PlayClipAtPoint(thisAudioClip, transform.position, 0.8F);
-            //SpriteRenderer balloonSR = gameObject.AddComponent<SpriteRenderer>();
-            //GetComponent<AudioSource>().Play();
-            //thisAudioClip = (AudioClip)Resources.Load("techno");
-           // thisAudioClip = musicPlayer.GetComponent<AudioSource>().GetComponent<AudioClip>();
-            //thisAudioClip = (AudioClip)Resources.Load("techno");
+        musicSource = musicPlayer.AddComponent<AudioSource>();
+        DontDestroyOnLoad(musicPlayer);
 
-            DontDestroyOnLoad(musicPlayer);
-                //AudioBegin = true;
-
-                // if (SceneManager.GetActiveScene().buildIndex != 0) { 
-                // DontDestroyOnLoad(gameObject);
-            //}
-        } else
-        {
-            if (this.gameObject.name != "MainMusic")
-            {
-                Destroy(this.gameObject);
-            }
-        }
     }
     void Start() {
-        /*if(localMusicStatus.GetComponent<MusicStarted>().GetMusicStatus() == 1)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            localMusicStatus.GetComponent<MusicStarted>().StartMusic();
-        }*/
+        music = new string[2];
+        music[0] = "Music\techno";
+        music[1] = @"Music\circus_or_carousel_theme";
     }
+    /**
+    * Change Music to a random song
+    **/
+    public void ChangeMusic()
+    {
+        Debug.Log(music[1]);
+        thisAudioClip = (AudioClip)Resources.Load(music[1]);
+        CycleMusic();
+    }
+    /**
+    * Change Music to a specific song
+    **/
+    public void ChangeMusic(string songName)
+    {
+        thisAudioClip = (AudioClip)Resources.Load(@"Music\"+ songName);
+        CycleMusic();
+    }
+    /*
+    *   Helper method to save code space
+    *   simply turns off music, assigns and plays the music.    
+    */
+    private void CycleMusic()
+    {
+        musicPlayer.GetComponent<AudioSource>().Stop();
+        musicPlayer.GetComponent<AudioSource>().clip = thisAudioClip;
+        musicPlayer.GetComponent<AudioSource>().Play();
+    }
+
     void Update()
     {
-       /* if(Application.loadedLevel == 0 || Application.loadedLevel == 11)
-       // {
-        //    backgroudMusic.Stop();
-           // DestroyObject(this.gameObject);
-        //} else *///if (backgroudMusic.isPlaying == false && (Application.loadedLevel != 0 || Application.loadedLevel != 11))
-        //{
-            //AudioSource.PlayClipAtPoint(myAu);
-            //backgroudMusic.volume = 0.05F;
-        //}
+        if (musicSource.clip == null)
+        {
+            CycleMusic();
+            musicPlayer.GetComponent<AudioSource>().loop = true;
+        }
     }
 }
