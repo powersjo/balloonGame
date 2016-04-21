@@ -6,27 +6,34 @@ public class MusicControl : MonoBehaviour {
     private bool flip = true;
     private GameObject musicPlayer;
     private string[] music;
+    int cap;
     void Awake()
     {
         musicPlayer = this.gameObject;
         musicPlayer.name = "MainMusic";
-
+        cap = 4;
         musicSource = musicPlayer.AddComponent<AudioSource>();
         DontDestroyOnLoad(musicPlayer);
 
     }
     void Start() {
-        music = new string[2];
-        music[0] = "Music\techno";
+        music = new string[5];
+        music[0] = @"Music\techno";
         music[1] = @"Music\circus_or_carousel_theme";
+        music[2] = @"Music\complimentary_colours";
+        music[3] = @"Music\lilly_s_saloon";
+        music[4] = @"Music\beware_theme";
+    }
+    public void enableEndMusic()
+    {
+        cap = 5;
     }
     /**
     * Change Music to a random song
     **/
     public void ChangeMusic()
     {
-        Debug.Log(music[1]);
-        thisAudioClip = (AudioClip)Resources.Load(music[1]);
+        thisAudioClip = (AudioClip)Resources.Load(music[UnityEngine.Random.Range(0, cap)]);
         CycleMusic();
     }
     /**
