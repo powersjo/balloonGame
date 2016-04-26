@@ -3,11 +3,12 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class Choose_lvl : MonoBehaviour {
-
+    GameObject localMusic;
     public int d = 1;
+    
 	// Use this for initialization
 	void Start () {
-	
+        localMusic = GameObject.Find("MainMusic");
 	}
 	public void StartTheGame(){
         SceneManager.LoadScene(13);
@@ -75,6 +76,11 @@ public class Choose_lvl : MonoBehaviour {
     public void Options()
     {
         SceneManager.LoadScene(12);
+    }
+    public void ToggleMute()
+    {
+        localMusic.GetComponent<MusicControl>().ToggleMute();
+        Debug.Log("From choose level");
     }
 
     public void MainMenu()

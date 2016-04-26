@@ -6,6 +6,7 @@ public class MusicControl : MonoBehaviour {
     private bool flip = true;
     private GameObject musicPlayer;
     private string[] music;
+    private bool mute;
     int cap;
     void Awake()
     {
@@ -17,6 +18,7 @@ public class MusicControl : MonoBehaviour {
 
     }
     void Start() {
+        mute = false;
         music = new string[5];
         music[0] = @"Music\techno";
         music[1] = @"Music\circus_or_carousel_theme";
@@ -28,6 +30,20 @@ public class MusicControl : MonoBehaviour {
     {
         cap = 5;
     }
+
+    public void ToggleMute()
+    {
+        if (!mute)
+        {
+            AudioListener.pause = mute = true;
+        }
+        else
+        {
+            AudioListener.pause = mute = false;
+        }
+        Debug.Log("mute is: " + mute);
+    }
+
     /**
     * Change Music to a random song
     **/
