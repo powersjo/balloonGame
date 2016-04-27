@@ -66,6 +66,7 @@
     <Compile Include="Assets\scripts\Balloon.cs" />
     <Compile Include="Assets\scripts\BalloonMiniLvl10.cs" />
     <Compile Include="Assets\scripts\BeginGame.cs" />
+    <Compile Include="Assets\scripts\ButtonSprite.cs" />
     <Compile Include="Assets\scripts\ChangeDirection.cs" />
     <Compile Include="Assets\scripts\ChangeMusic.cs" />
     <Compile Include="Assets\scripts\Choose_lvl.cs" />

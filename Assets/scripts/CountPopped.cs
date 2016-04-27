@@ -81,7 +81,7 @@ public class CountPopped : MonoBehaviour {
         return max;
     }
 	void SetCountText(){
-		countText.text = "Balloons popped: " + count.ToString ();
+		countText.text = "popped: " + count.ToString ();
 	}
 	void SetMissedText(){
 		missedText.text = "Missed: " + missed.ToString ();
