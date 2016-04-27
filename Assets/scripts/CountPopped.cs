@@ -174,7 +174,7 @@ public class CountPopped : MonoBehaviour {
                 other.lvlComplete(Application.loadedLevel);
                 complete = true;
             }
-            losePic.GetComponent<Image>().sprite =  Resources.Load<Sprite>("win");
+            losePic.GetComponent<Image>().sprite =  Resources.Load<Sprite>(@"Sprites\win");
             but01.SetActive(true); // new level.
             SetAccuracyText();
         }
