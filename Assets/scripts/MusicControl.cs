@@ -41,7 +41,6 @@ public class MusicControl : MonoBehaviour {
         {
             AudioListener.pause = mute = false;
         }
-        Debug.Log("mute is: " + mute);
     }
 
     /**

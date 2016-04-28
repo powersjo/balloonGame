@@ -8,10 +8,7 @@ public class ChangeMusic : MonoBehaviour
     Button myButton;
 	// Use this for initialization
 	void Start () {
-        // UnityEngine.Events.UnityAction action = () => { changeMusicLocal(); };
-        //myButton.onClick.AddListener(action);
         myButton = this.gameObject.AddComponent<Button>();
-        //myButton = this.gameObject.GetComponent<Button>();
         UnityEngine.Events.UnityAction action = () => { changeMusicLocal();};
         myButton.onClick.AddListener(action);
     }
@@ -26,9 +23,6 @@ public class ChangeMusic : MonoBehaviour
     void changeMusicLocal()
     {
         music = GameObject.Find("MainMusic");
-        //if (music != null)
-       // {
-        //}
         string button = this.gameObject.name.ToString();
         if (button.Equals("Latin"))
         {
