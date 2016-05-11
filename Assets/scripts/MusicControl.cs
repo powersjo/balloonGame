@@ -7,11 +7,12 @@ public class MusicControl : MonoBehaviour {
     private GameObject musicPlayer;
     private string[] music;
     private bool mute;
-    int cap;
+    int cap, lastLevel;
     void Awake()
     {
         musicPlayer = this.gameObject;
         musicPlayer.name = "MainMusic";
+        lastLevel = 0;
         cap = 4;
         musicSource = musicPlayer.AddComponent<AudioSource>();
         DontDestroyOnLoad(musicPlayer);
@@ -25,6 +26,16 @@ public class MusicControl : MonoBehaviour {
         music[2] = @"Music\complimentary_colours";
         music[3] = @"Music\lilly_s_saloon";
         music[4] = @"Music\beware_theme";
+    }
+
+    public void SetLastLevel(int n)
+    {
+        lastLevel = n;
+    }
+
+    public int GetLastLevel()
+    {
+        return lastLevel;
     }
     public void enableEndMusic()
     {

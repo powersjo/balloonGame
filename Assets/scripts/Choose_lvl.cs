@@ -59,6 +59,8 @@ public class Choose_lvl : MonoBehaviour {
     }
     public void LastLevel()
     {
+        GameObject temp = GameObject.Find("MainMusic");
+        d = temp.GetComponent<MusicControl>().GetLastLevel();
         SceneManager.LoadScene(d);
     }
     public void ExitGame()
@@ -68,6 +70,12 @@ public class Choose_lvl : MonoBehaviour {
     public void SetLastLevel(int level)
     {
         d = level;
+    }
+
+    public void SetLastLevelBetter(int n)
+    {
+        GameObject temp = GameObject.Find("MainMusic");
+        temp.GetComponent<MusicControl>().SetLastLevel(n);
     }
     public void RestartLevel()
     {

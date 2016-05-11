@@ -8,9 +8,9 @@ public class CountPopped : MonoBehaviour {
 	private int count, missed, max, totalClicks, backgroundNum, userHealth;
     public Text countText, currentTime, missedText, accuracyText;
     private double beginTime, timer;
-	public GameObject but, but01, butExit, losePic, clickAccurate;
+	public GameObject but, but01, butExit, losePic, clickAccurate, options;
     private GameObject go;
-    private bool hasPlanet, fail, complete, lockAccuracy;
+    private bool hasPlanet, fail, complete, lockAccuracy, pause;
     private Profile other;
 
     // Use this for initialization
@@ -21,7 +21,7 @@ public class CountPopped : MonoBehaviour {
 		count = missed = totalClicks = 0;
         max = GetCurrentScene();
         start_click();
-        fail = complete = lockAccuracy = false;
+        fail = complete = lockAccuracy = pause = false;
         if(Application.loadedLevel == 11)
         {
             userHealth = 30;
@@ -90,6 +90,8 @@ public class CountPopped : MonoBehaviour {
     {
         if (!lockAccuracy)
         {
+            pause = true;
+            options.SetActive(true); //Options button
             accuracyText.text = "Accuracy: " + GetAccuracy().ToString("0.00") + "%";
             clickAccurate.SetActive(true); //Accuracy display
             lockAccuracy = true;
@@ -147,6 +149,7 @@ public class CountPopped : MonoBehaviour {
         butExit.SetActive(false); //The exit button
         losePic.SetActive(false); //Balloons win
         clickAccurate.SetActive(false); //Click accuracy
+        options.SetActive(false); // Options button
     }
 	// Update is called once per frame
 	void Update () {

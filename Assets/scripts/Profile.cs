@@ -5,11 +5,11 @@ using System.IO;
 public class Profile : MonoBehaviour {
 
     private string path = "Assets/Resources/SaveFiles/Save.txt";
-    private int highest;
+    private int highest = 1;
     // Use this for initialization
     void Start () {
-        highest = 1;
-        //prepareSave();
+        prepareSave();
+        highest = GetHighestLvlComplete();
 	}
 
     private void encrypt() //To encrypt the save file
@@ -21,53 +21,37 @@ public class Profile : MonoBehaviour {
     {
 
     }
-    /*
-    * appends completed level to the saved file. 
-    */
 
     public int GetHighestLvlComplete()
     {
         //Load up the save file and check the highest completed level. 
-
+        for (int i = 11; i > 1; i--) {
+            string level = "Level:" + i.ToString();
+            if (File.ReadAllText(path).Contains(level))
+            {
+                highest = i;
+                i = 0;
+            }
+        }
         return highest;
     }
-	public void lvlComplete(int x)
+
+    /*
+    * appends completed level to the saved file. 
+    */
+    public void lvlComplete(int x)
     {
-        if(x == 2)
+        if (x > highest)
         {
-            System.IO.File.AppendAllText(path, "Level:2\n");
-        }
-        if (x == 3)
-        {
-            System.IO.File.AppendAllText(path, "Level:3\n");
-        }
-        if (x == 4)
-        {
-            System.IO.File.AppendAllText(path, "Level:4\n");
-        }
-        if (x == 5)
-        {
-            System.IO.File.AppendAllText(path, "Level:5\n");
-        }
-        if (x == 6)
-        {
-            System.IO.File.AppendAllText(path, "Level:6\n");
-        }
-        if (x == 7)
-        {
-            System.IO.File.AppendAllText(path, "Level:7\n");
-        }
-        if (x == 8)
-        {
-            System.IO.File.AppendAllText(path, "Level:8\n");
-        }
-        if (x == 9)
-        {
-            System.IO.File.AppendAllText(path, "Level:9\n");
-        }
-        if (x == 10)
-        {
-            System.IO.File.AppendAllText(path, "Level:10\n");
+            highest = x;
+            string level = "Level:" + highest.ToString();
+            int isItWritten = File.ReadAllText(path).Contains(level) ? 1 : 0;
+            if(isItWritten == 0)
+            {
+                System.IO.File.AppendAllText(path, level + "\n");
+                Debug.Log(level);
+            }
+            
         }
     }
     public void prepareSave()
