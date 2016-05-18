@@ -153,6 +153,7 @@ public class CountPopped : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
+        other = (Profile)go.GetComponent(typeof(Profile));
         if (Input.GetMouseButtonDown(0))
         {
             IncreaseClicks();
@@ -167,17 +168,19 @@ public class CountPopped : MonoBehaviour {
 			but.SetActive(true);
             butExit.SetActive(true); //The exit button
             losePic.SetActive(true); //Balloons win
+            other.SetFail(true);
             SetAccuracyText();
         } 
         if (missed < count && missed + count == max && !fail) // level difficulty could be implemented here. 
         {
-            other = (Profile)go.GetComponent(typeof(Profile));
             if (!complete)
             {
                 other.lvlComplete(Application.loadedLevel);
                 complete = true;
             }
-            losePic.GetComponent<Image>().sprite =  Resources.Load<Sprite>(@"Sprites\win");
+            other.SetFail(false);
+            //losePic.GetComponent<Image>().sprite =  Resources.Load<Sprite>(@"Sprites\win");
+            losePic.SetActive(true);
             but01.SetActive(true); // new level.
             SetAccuracyText();
         }

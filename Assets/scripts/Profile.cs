@@ -6,12 +6,21 @@ public class Profile : MonoBehaviour {
 
     private string path = "Assets/Resources/SaveFiles/Save.txt";
     private int highest = 1;
+    private bool fail;
     // Use this for initialization
     void Start () {
         prepareSave();
         highest = GetHighestLvlComplete();
+        fail = false;
 	}
-
+    public bool DidFail()
+    {
+        return fail;
+    }
+    public void SetFail(bool value)
+    {
+        fail = value;
+    }
     private void encrypt() //To encrypt the save file
     {
 
