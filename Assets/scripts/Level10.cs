@@ -8,7 +8,7 @@ public class Level10 : MonoBehaviour
     float posx, posy, posz, speed, offset;
     int health;
     String[] balloonColors;
-    private bool mini, endGame;
+    private bool mini, endGame, levelRunning;
     private GUIStyle currentStyle = new GUIStyle(GUI.skin.box);
     Texture2D healthUserTexture;
     private GameObject go;
@@ -21,12 +21,15 @@ public class Level10 : MonoBehaviour
     {
         go = GameObject.Find("Master");
         mini = endGame = false;
+        levelRunning = true;
         posx = offset = 0;
         posy = speed = 2;
         health = 25;
         userHealthColor = Color.green;
         screenW = Screen.width;
         screenH = Screen.height;
+        go.GetComponent<CountPopped>().increaseMaxCustom(health);
+        other = (CountPopped)go.GetComponent(typeof(CountPopped));
         //healthUserTexture = new Texture2D(2, 2, TextureFormat.ARGB32, false);
         SpriteRenderer balloonSR = gameObject.AddComponent<SpriteRenderer>();
         Sprite var = Resources.Load<Sprite>("Balloon/Black");
@@ -54,7 +57,7 @@ public class Level10 : MonoBehaviour
 
     void UpdateColor()
     {
-        CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
+        //CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
         int temp = other.getUserHeatlth();
         if (temp < 16)
         {
@@ -70,7 +73,7 @@ public class Level10 : MonoBehaviour
 
     private int GetTheHealth()
     {
-        CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
+        //CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
         return -other.getUserHeatlth() * 5;
     }
     
@@ -107,41 +110,45 @@ public class Level10 : MonoBehaviour
 
     void OnMouseDown()
     {
-        health--;
-        if (health < 1)
+        if (levelRunning)
         {
-            Destroy(this.gameObject);
+            health--;
+            if (health < 1)
+            {
+                Destroy(this.gameObject);
+            }
+            this.transform.localScale = new Vector3(this.transform.localScale.x * .90F, this.transform.localScale.y * .90F, 1);
+            this.transform.GetComponent<SphereCollider>().radius = this.transform.GetComponent<SphereCollider>().radius * .96F;
+            offset += .0001F; //this osset makes it so that the balloon recovers faster. 
+
+            //make more balloons
+            int lastx;
+            float lasty, lastFloatx, lastFloaty;
+            lastx = (int)this.transform.position.x;
+            lasty = this.transform.position.y;
+            lastFloatx = this.transform.localScale.x / 4;
+            lastFloaty = this.transform.localScale.y / 4;
+            GameObject clone1, clone2;
+            clone1 = clone2 = new GameObject(); // I left off the clone1 and clone2 have the wrong y axis and don't move. 
+
+            clone1 = Instantiate(this.gameObject, new Vector3(this.transform.position.x - 2, this.transform.position.y - 3, 0), this.transform.rotation) as GameObject;
+            clone2 = (GameObject)Instantiate(this.gameObject, new Vector3(this.transform.position.x + 2, this.transform.position.y - 3, 0), this.transform.rotation);
+
+            Destroy(clone1.GetComponent<Level10>());
+            Destroy(clone2.GetComponent<Level10>());
+
+            clone1.AddComponent<BalloonMiniLvl10>();
+            clone2.AddComponent<BalloonMiniLvl10>();
+            go.GetComponent<CountPopped>().increaseMaxTwo();
+            //add a new script to create the proper mini balloon. 
+
+
+            /*clone1.GetComponent<Level10>().SetMini();
+            clone1.transform.localScale = new Vector3(.7F, 1.2F, 1);
+            go.GetComponent<CountPopped>().increaseMaxTwo();
+            clone2.GetComponent<Level10>().SetMini();
+            clone2.transform.localScale = new Vector3(.7F, 1.2F, 1);*/
         }
-        this.transform.localScale = new Vector3(this.transform.localScale.x * .90F, this.transform.localScale.y * .90F, 1);
-        this.transform.GetComponent<SphereCollider>().radius = this.transform.GetComponent<SphereCollider>().radius * .96F;
-        offset += .0001F; //this osset makes it so that the balloon recovers faster. 
-
-        //make more balloons
-        int lastx;
-        float lasty, lastFloatx, lastFloaty;
-        lastx = (int)this.transform.position.x;
-        lasty = this.transform.position.y;
-        lastFloatx = this.transform.localScale.x / 4;
-        lastFloaty = this.transform.localScale.y / 4;
-        GameObject clone1, clone2;
-        clone1 = clone2 = new GameObject(); // I left off the clone1 and clone2 have the wrong y axis and don't move. 
-
-        clone1 = Instantiate(this.gameObject, new Vector3(this.transform.position.x - 2, this.transform.position.y - 3, 0), this.transform.rotation) as GameObject;
-        clone2 = (GameObject)Instantiate(this.gameObject, new Vector3(this.transform.position.x + 2, this.transform.position.y - 3, 0), this.transform.rotation);
-
-        Destroy(clone1.GetComponent<Level10>());
-        Destroy(clone2.GetComponent<Level10>());
-
-        clone1.AddComponent<BalloonMiniLvl10>();
-        clone2.AddComponent<BalloonMiniLvl10>();
-        //add a new script to create the proper mini balloon. 
-
-
-        /*clone1.GetComponent<Level10>().SetMini();
-        clone1.transform.localScale = new Vector3(.7F, 1.2F, 1);
-        go.GetComponent<CountPopped>().increaseMaxTwo();
-        clone2.GetComponent<Level10>().SetMini();
-        clone2.transform.localScale = new Vector3(.7F, 1.2F, 1);*/
     }
 
     // Update is called once per frame
@@ -180,12 +187,12 @@ public class Level10 : MonoBehaviour
                 Space.World);
             }
         //}
-        if (this.transform.localScale.y > 5f)
+        if (this.transform.localScale.y > 5f || -GetTheHealth() < 1)  //Fail the level
         {
             endGame = true;
             other = (CountPopped)go.GetComponent(typeof(CountPopped));
             other.killUser();
-
+            levelRunning = false;
         }
         if (!mini && !endGame)
         {

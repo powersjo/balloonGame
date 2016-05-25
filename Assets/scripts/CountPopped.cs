@@ -44,10 +44,15 @@ public class CountPopped : MonoBehaviour {
             userHealth--;
         }
     }
-    public void killUser()
+    public void killUser() //The boss got too big and won. 
     {
         userHealth = 0;
-        fail = true;
+        if (!fail)
+        {
+            go.GetComponent<CountPopped>().IncreaseMissed(25); //25 is the boss health. hard coded fail
+        }
+        fail = true; // Here follow true and see what we need to do to 'pause' the game and show the menu. 
+        // probably send stop move commands to balloons and stop grow commands to boss
     }
 
     public double GetTimer()
@@ -69,6 +74,10 @@ public class CountPopped : MonoBehaviour {
     public int GetBackNum()
     {
         return backgroundNum;
+    }
+    public void increaseMaxCustom(int x)
+    {
+        max += x;
     }
     public void increaseMaxTwo()
     {
@@ -109,6 +118,11 @@ public class CountPopped : MonoBehaviour {
 		missed++;
 		SetMissedText ();
 	}
+    public void IncreaseMissed(int x)
+    {
+        missed += x;
+        SetMissedText();
+    }
     private float GetAccuracy()
     {
         float accurate = (float)count / (float)totalClicks;
@@ -158,7 +172,7 @@ public class CountPopped : MonoBehaviour {
         {
             IncreaseClicks();
         }
-		if((missed + count) != max){
+		if((missed + count) != max && !other.DidFail()){ //Did fail is a question, did we fail? If not, continue time. 
             SetTime();
 		}
 		if (missed < 1) {
@@ -169,7 +183,9 @@ public class CountPopped : MonoBehaviour {
             butExit.SetActive(true); //The exit button
             losePic.SetActive(true); //Balloons win
             other.SetFail(true);
+            lockAccuracy = false;
             SetAccuracyText();
+            //options.SetActive(true); //Options button <-- this is in set accuracy text. 
         } 
         if (missed < count && missed + count == max && !fail) // level difficulty could be implemented here. 
         {
