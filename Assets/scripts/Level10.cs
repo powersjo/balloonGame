@@ -15,6 +15,7 @@ public class Level10 : MonoBehaviour
     Color userHealthColor;
     int screenW, screenH;
     private CountPopped other;
+    public AudioSource pop;
 
     // Use this for initialization
     void Start()
@@ -25,6 +26,7 @@ public class Level10 : MonoBehaviour
         posx = offset = 0;
         posy = speed = 2;
         health = 25;
+        pop = (AudioSource)gameObject.AddComponent<AudioSource>();
         userHealthColor = Color.green;
         screenW = Screen.width;
         screenH = Screen.height;
@@ -140,6 +142,15 @@ public class Level10 : MonoBehaviour
             clone1.AddComponent<BalloonMiniLvl10>();
             clone2.AddComponent<BalloonMiniLvl10>();
             go.GetComponent<CountPopped>().increaseMaxTwo();
+            AudioClip myAudioClip;
+            String[] bossHits = new String[4];
+            bossHits[0] = "Sounds/LevelTenBoss/hard punch";
+            bossHits[1] = "Sounds/LevelTenBoss/oof";
+            bossHits[2] = "Sounds/LevelTenBoss/hit";
+            bossHits[3] = "Sounds/LevelTenBoss/punch";
+            myAudioClip = (AudioClip)Resources.Load(bossHits[UnityEngine.Random.Range(0, 4)].ToString());
+            pop.clip = myAudioClip;
+            AudioSource.PlayClipAtPoint(pop.clip, transform.position);
             //add a new script to create the proper mini balloon. 
 
 
