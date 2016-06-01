@@ -12,7 +12,7 @@ public class LoadingScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         time = UnityEngine.Random.Range(3F, 5F);
-        theRandomText = new String[10];
+        theRandomText = new String[20];
         theRandomText[0] = "Random Hints or Fun Facts!";
         theRandomText[1] = "Click on a balloon to make it pop!";
         theRandomText[2] = "Some balloons are armored and require multiple clicks!";
@@ -23,7 +23,17 @@ public class LoadingScript : MonoBehaviour {
         theRandomText[7] = "Balloons are known to scare animals and small children...";
         theRandomText[8] = "Surgeons who grew up playing video games make fewer mistakes in surgery!";
         theRandomText[9] = "Helium is not Oxygen.";
-        randomText.text = theRandomText[UnityEngine.Random.Range(0, 10)]; //random range excludes the last digit
+        theRandomText[10] = "Gaming gives you better morals, so be nice to balloons in real life.";
+        theRandomText[11] = "Playing games helps you think faster.";
+        theRandomText[12] = "If you have enough balloons you will float in the air.";
+        theRandomText[13] = "Try filling balloons with water and food coloring then freeze them.";
+        theRandomText[14] = "Try splattering balloons with paint.";
+        theRandomText[15] = "Put confetti in a balloon, then pop it!";
+        theRandomText[16] = "Each level adds more difficulty from the previous level.";
+        theRandomText[17] = "Balloons can be used as round molds.";
+        theRandomText[18] = "If you can't pop all the balloons on a level, try clicking faster.";
+        theRandomText[19] = "Beating level 10 unlocks the ending music in the options menu.";
+        randomText.text = theRandomText[UnityEngine.Random.Range(0, 20)]; //random range excludes the last digit
 
     }
 
