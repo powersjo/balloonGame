@@ -221,12 +221,12 @@ public class Balloon : MonoBehaviour {
 	float GetRandomTime(){
 		return UnityEngine.Random.Range (1.0F, 5.0F + (Application.loadedLevel * 5));
 	}
-    public static void MyDelay(int seconds)
+    /*public static void MyDelay(int seconds)
     {
         DateTime ts = DateTime.Now + TimeSpan.FromSeconds(seconds);
 
         do { } while (DateTime.Now < ts);
-    }
+    }*/
     // Update is called once per frame
     void Update () {
         // if (this.GetComponentInChildren(Animation)) { }

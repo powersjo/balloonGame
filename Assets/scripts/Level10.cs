@@ -5,15 +5,14 @@ using System;
 public class Level10 : MonoBehaviour
 {
 
-    float posx, posy, posz, speed, offset;
-    int health;
+    private float posx, posy, posz, speed, offset;
+    private GameObject music, go;
+    private int health, screenW, screenH;
     String[] balloonColors;
     private bool mini, endGame, levelRunning;
     private GUIStyle currentStyle = new GUIStyle(GUI.skin.box);
     Texture2D healthUserTexture;
-    private GameObject go;
     Color userHealthColor;
-    int screenW, screenH;
     private CountPopped other;
     public AudioSource pop;
 
@@ -21,6 +20,8 @@ public class Level10 : MonoBehaviour
     void Start()
     {
         go = GameObject.Find("Master");
+        music = GameObject.Find("MainMusic");
+        music.GetComponent<MusicControl>().ChangeMusic("beware_theme"); //Level 10 boss Music
         mini = endGame = false;
         levelRunning = true;
         posx = offset = 0;
