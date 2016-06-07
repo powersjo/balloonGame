@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.IO;
+using System.Security;
+using System.Security.Cryptography;
+using System.Runtime.InteropServices;
+using System.Text;
 
 public class Profile : MonoBehaviour {
 
-    private string path = "Assets/Resources/SaveFiles/Save.txt";
+    private string path = @"Assets/Resources/SaveFiles/Save.txt";
     private int highest = 1;
     private bool fail;
     // Use this for initialization
@@ -12,7 +15,8 @@ public class Profile : MonoBehaviour {
         prepareSave();
         highest = GetHighestLvlComplete();
         fail = false;
-	}
+    }
+
     public bool DidFail()
     {
         return fail;
@@ -21,27 +25,21 @@ public class Profile : MonoBehaviour {
     {
         fail = value;
     }
-    private void encrypt() //To encrypt the save file
-    {
-
-    }
-
-    private void decrypt() //To decrypt the save file
-    {
-
-    }
 
     public int GetHighestLvlComplete()
     {
         //Load up the save file and check the highest completed level. 
+        Debug.Log("Highest???");
         for (int i = 11; i > 1; i--) {
             string level = "Level:" + i.ToString();
-            if (File.ReadAllText(path).Contains(level))
+            if (AvoEx.AesEncryptor.DecryptString(File.ReadAllText(path).ToString()).ToString().Contains(level))
             {
+                Debug.Log("Checked highest");
                 highest = i;
                 i = 0;
             }
         }
+        Debug.Log(AvoEx.AesEncryptor.DecryptString(File.ReadAllText(path)) + "gethighestlvlcomplete");
         return highest;
     }
 
@@ -50,18 +48,21 @@ public class Profile : MonoBehaviour {
     */
     public void lvlComplete(int x)
     {
+        //decrypt();
         if (x > highest)
         {
             highest = x;
             string level = "Level:" + highest.ToString();
-            int isItWritten = File.ReadAllText(path).Contains(level) ? 1 : 0;
+            int isItWritten = AvoEx.AesEncryptor.DecryptString(File.ReadAllText(path)).Contains(level) ? 1 : 0;
+            //Debug.Log(AvoEx.AesEncryptor.DecryptString(File.ReadAllText(path)) + "lvlcomplete");
             if(isItWritten == 0)
             {
-                System.IO.File.AppendAllText(path, level + "\n");
-                Debug.Log(level);
+                System.IO.File.WriteAllText(path, AvoEx.AesEncryptor.Encrypt(level) + "\n");
             }
-            
+            Debug.Log(AvoEx.AesEncryptor.DecryptString(File.ReadAllText(path)) + "lvlcomplete");
+
         }
+        //encrypt();
     }
     public void prepareSave()
     {
@@ -72,7 +73,8 @@ public class Profile : MonoBehaviour {
         }
         if (!File.Exists(path))
         {
-            System.IO.File.WriteAllText(path, "save\n");
+            System.IO.File.WriteAllText(path, AvoEx.AesEncryptor.Encrypt("Start save") + "\n");
+            Debug.Log("Created Save file - prepare");
         }
     }
     /*
@@ -84,7 +86,8 @@ public class Profile : MonoBehaviour {
         {
             if (File.Exists(path))
             {
-                System.IO.File.WriteAllText(path, "save\n");
+                System.IO.File.WriteAllText(path, AvoEx.AesEncryptor.Encrypt("Start save") + "\n");
+                Debug.Log("Created Save file - reset");
             }
         }
     }

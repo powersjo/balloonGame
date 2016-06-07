@@ -15,47 +15,47 @@ public class Choose_lvl : MonoBehaviour {
 	}
     public void Lvl1()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(15);
     }
     public void Lvl2()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(15);
     }
     public void Lvl3()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(15);
     }
     public void Lvl4()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(15);
     }
     public void Lvl5()
     {
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(15);
     }
     public void Lvl6()
     {
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene(15);
     }
     public void Lvl7()
     {
-        SceneManager.LoadScene(8);
+        SceneManager.LoadScene(15);
     }
     public void Lvl8()
     {
-        SceneManager.LoadScene(9);
+        SceneManager.LoadScene(15);
     }
     public void Lvl9()
     {
-        SceneManager.LoadScene(10);
+        SceneManager.LoadScene(15);
     }
     public void Lvl10()
     {
-        SceneManager.LoadScene(11);
+        SceneManager.LoadScene(15);
     }
     public void Endless()
     {
-        SceneManager.LoadScene(14);
+        SceneManager.LoadScene(15);
     }
     public void LastLevel()
     {
@@ -111,6 +111,6 @@ public class Choose_lvl : MonoBehaviour {
     }
     public void NextLevel()
     {
-        SceneManager.LoadScene(Application.loadedLevel + 1);
+        SceneManager.LoadScene(15);
     }
 }

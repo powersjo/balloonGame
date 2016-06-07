@@ -2,16 +2,18 @@
 using System.Collections;
 using UnityEngine.UI; //needed for Text
 using System; //needed for string
+using UnityEngine.SceneManagement; //Needed for loading scenes.
 
 public class LoadingScript : MonoBehaviour {
 
     public GameObject go;
     private String[] theRandomText;
     public Text loadingText, randomText;
-    private float time;
+    private float time, loadTime;
     // Use this for initialization
     void Start () {
-        time = UnityEngine.Random.Range(3F, 5F);
+        time = UnityEngine.Random.Range(3F, 4F);
+        loadTime = UnityEngine.Random.Range(3F, 6F);
         theRandomText = new String[20];
         theRandomText[0] = "Random Hints or Fun Facts!";
         theRandomText[1] = "Click on a balloon to make it pop!";
@@ -56,6 +58,13 @@ public class LoadingScript : MonoBehaviour {
         } else
         {
             time = UnityEngine.Random.Range(3F, 5F);
+        }
+        loadTime -= Time.deltaTime;
+        if(loadTime < 0)
+        {
+            GameObject go = GameObject.Find("MainMusic");
+            Debug.Log("Last level value: " + go.GetComponent<MusicControl>().GetLastLevel());
+            SceneManager.LoadScene(go.GetComponent<MusicControl>().GetLastLevel());
         }
     }
 }
