@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class CountPopped : MonoBehaviour {
 
@@ -35,6 +36,18 @@ public class CountPopped : MonoBehaviour {
     public int getUserHeatlth()
     {
         return userHealth;
+    }
+
+    //Using this in level ten to win the game
+    public void SetCount(int value)
+    {
+        count = value;
+    }
+
+    //Using this in level ten to win the game
+    public void SetMissed(int value)
+    {
+        missed = value;
     }
 
     public void subUserHealth()
@@ -86,7 +99,6 @@ public class CountPopped : MonoBehaviour {
     private int GetCurrentScene()
     {
         max = 10 + ((Application.loadedLevel - 1) * 5);
-        //Debug.Log(max);
         return max;
     }
 	void SetCountText(){
@@ -126,7 +138,6 @@ public class CountPopped : MonoBehaviour {
     private float GetAccuracy()
     {
         float accurate = (float)count / (float)totalClicks;
-        //Debug.Log("Total " + totalClicks + " | Count " + count + " | Accuracy " + accurate);
         return accurate * 100;
     }
     System.Diagnostics.Stopwatch _sw = new System.Diagnostics.Stopwatch();
@@ -145,18 +156,11 @@ public class CountPopped : MonoBehaviour {
     private void Each_Tick()
     {
         TimeSpan ts = _sw.Elapsed;
-        //  currentTime.text = ts.ToString();
         DateTime dtime = DateTime.MinValue.Add(ts);
         currentTime.text = "Timer: " + string.Format(@"{0:mm\:ss}", dtime);
     }
     private void SetTime()
     {
-        //timer = System.DateTime.Now.ToOADate();
-        //timer = timer - beginTime;
-        //v/ar min = timer / 60;
-        //var sec = timer % 60;
-        //var frac = (timer * 100) % 100;
-        //currentTime.text = string.Format("Timer: {0:00}:{1:00}:{2:00}", min, sec, frac);
         Each_Tick();
         but.SetActive(false); //restart button
         but01.SetActive(false); //Next level button
@@ -165,6 +169,21 @@ public class CountPopped : MonoBehaviour {
         clickAccurate.SetActive(false); //Click accuracy
         options.SetActive(false); // Options button
     }
+
+    //For level ten win only
+    bool GetLevel10()
+    {
+        bool value = false;
+        if (SceneManager.GetSceneByName("scene10") == SceneManager.GetActiveScene())
+        {
+            if (!GameObject.FindGameObjectWithTag("Balloon"))
+            {
+                value = true;
+            }
+        }
+        return value;
+    } 
+
 	// Update is called once per frame
 	void Update () {
         other = (Profile)go.GetComponent(typeof(Profile));
@@ -185,9 +204,8 @@ public class CountPopped : MonoBehaviour {
             other.SetFail(true);
             lockAccuracy = false;
             SetAccuracyText();
-            //options.SetActive(true); //Options button <-- this is in set accuracy text. 
         } 
-        if (missed < count && missed + count == max && !fail) // level difficulty could be implemented here. 
+        if (missed < count && missed + count == max && !fail || GetLevel10()) // level difficulty could be implemented here. 
         {
             if (!complete)
             {
@@ -195,7 +213,6 @@ public class CountPopped : MonoBehaviour {
                 complete = true;
             }
             other.SetFail(false);
-            //losePic.GetComponent<Image>().sprite =  Resources.Load<Sprite>(@"Sprites\win");
             losePic.SetActive(true);
             but01.SetActive(true); // new level.
             SetAccuracyText();

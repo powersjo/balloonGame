@@ -33,7 +33,6 @@ public class Level10 : MonoBehaviour
         screenH = Screen.height;
         go.GetComponent<CountPopped>().increaseMaxCustom(health);
         other = (CountPopped)go.GetComponent(typeof(CountPopped));
-        //healthUserTexture = new Texture2D(2, 2, TextureFormat.ARGB32, false);
         SpriteRenderer balloonSR = gameObject.AddComponent<SpriteRenderer>();
         Sprite var = Resources.Load<Sprite>("Balloon/Black");
         try
@@ -60,7 +59,6 @@ public class Level10 : MonoBehaviour
 
     void UpdateColor()
     {
-        //CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
         int temp = other.getUserHeatlth();
         if (temp < 16)
         {
@@ -76,7 +74,6 @@ public class Level10 : MonoBehaviour
 
     private int GetTheHealth()
     {
-        //CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
         return -other.getUserHeatlth() * 5;
     }
     
@@ -116,13 +113,13 @@ public class Level10 : MonoBehaviour
         if (levelRunning)
         {
             health--;
-            if (health < 1)
+            if (health < 1) 
             {
                 Destroy(this.gameObject);
             }
             this.transform.localScale = new Vector3(this.transform.localScale.x * .90F, this.transform.localScale.y * .90F, 1);
             this.transform.GetComponent<SphereCollider>().radius = this.transform.GetComponent<SphereCollider>().radius * .96F;
-            offset += .0001F; //this osset makes it so that the balloon recovers faster. 
+            offset += .0001F; //this offset makes it so that the balloon recovers faster. 
 
             //make more balloons
             int lastx;
@@ -169,36 +166,33 @@ public class Level10 : MonoBehaviour
         Vector3 targetPosition = new Vector3(posx, posy, posz);
         Vector3 targetOffset = new Vector3(0, 0, 0);
         Vector3 currentPosition = this.transform.position;
-        //if (health > 50)
-        //{
-            if (UnityEngine.Random.Range(0, (16 - Application.loadedLevel)) == 0)
+        if (UnityEngine.Random.Range(0, (16 - Application.loadedLevel)) == 0)
+        {
+            if (UnityEngine.Random.Range(0, 1) == 0)
             {
-                if (UnityEngine.Random.Range(0, 1) == 0)
-                {
-                    targetOffset += new Vector3(10, 0, 0); //right
-                    posx = UnityEngine.Random.Range(-4, 4);
-                }
-                else
-                {
-                    targetOffset += new Vector3(-10, 0, 0); //left
-                    posx = UnityEngine.Random.Range(-4, 4);
-                }
+                targetOffset += new Vector3(10, 0, 0); //right
+                posx = UnityEngine.Random.Range(-4, 4);
             }
-            //first, check to see if we're close enough to the target
-            if (Vector3.Distance(currentPosition, targetPosition) > .1f)
+            else
             {
-                Vector3 directionOfTravel = targetPosition - currentPosition + targetOffset;
-                //now normalize the direction, since we only want the direction information
-                directionOfTravel.Normalize();
-                //scale the movement on each axis by the directionOfTravel vector components
+                targetOffset += new Vector3(-10, 0, 0); //left
+                posx = UnityEngine.Random.Range(-4, 4);
+            }
+        }
+        //first, check to see if we're close enough to the target
+        if (Vector3.Distance(currentPosition, targetPosition) > .1f)
+        {
+            Vector3 directionOfTravel = targetPosition - currentPosition + targetOffset;
+            //now normalize the direction, since we only want the direction information
+            directionOfTravel.Normalize();
+            //scale the movement on each axis by the directionOfTravel vector components
 
-                this.transform.Translate(
-                (directionOfTravel.x * speed * Time.deltaTime),
-                (directionOfTravel.y * speed * Time.deltaTime),
-                (directionOfTravel.z),
-                Space.World);
-            }
-        //}
+            this.transform.Translate(
+            (directionOfTravel.x * speed * Time.deltaTime),
+            (directionOfTravel.y * speed * Time.deltaTime),
+            (directionOfTravel.z),
+            Space.World);
+        }
         if (this.transform.localScale.y > 5f || -GetTheHealth() < 1)  //Fail the level
         {
             endGame = true;
