@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; //Needed for loading scenes.
 
-public class BeginGame : MonoBehaviour {
+public class delayScript : MonoBehaviour {
 
     private float time;
 
     // Use this for initialization
     void Start () {
-        time = 6;//UnityEngine.Random.Range(3F, 4F); 
-	}
+        time = UnityEngine.Random.Range(3F, 4F);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,5 +21,6 @@ public class BeginGame : MonoBehaviour {
         {
             SceneManager.LoadScene("mainMenu");
         }
+        //SceneManager.LoadScene(go.GetComponent<MusicControl>().GetLastLevel());
     }
 }

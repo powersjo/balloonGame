@@ -8,6 +8,8 @@ public class MusicControl : MonoBehaviour {
     private string[] music;
     private bool mute;
     int cap, lastLevel;
+    private float time;
+
     void Awake()
     {
         musicPlayer = this.gameObject;
@@ -19,6 +21,7 @@ public class MusicControl : MonoBehaviour {
 
     }
     void Start() {
+        time = 5.9f;
         mute = false;
         music = new string[5];
         music[0] = @"Music\techno";
@@ -83,10 +86,17 @@ public class MusicControl : MonoBehaviour {
 
     void Update()
     {
-        if (musicSource.clip == null)
+        if (time > 0)
         {
-            CycleMusic();
-            musicPlayer.GetComponent<AudioSource>().loop = true;
+            time -= Time.deltaTime;
+        }
+        else
+        {
+            if (musicSource.clip == null)
+            {
+                CycleMusic();
+                musicPlayer.GetComponent<AudioSource>().loop = true;
+            }
         }
     }
 }
