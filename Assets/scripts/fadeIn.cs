@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class fadeIn : MonoBehaviour {
+
+    private GameObject[] letters;
 
     public void FadeMe()
     {
@@ -29,6 +32,23 @@ public class fadeIn : MonoBehaviour {
 
     void Start()
     {
+        Color[] colorBox = new Color[8];
+        colorBox[0] = Color.red;
+        colorBox[1] = Color.blue;
+        colorBox[2] = Color.yellow;
+        colorBox[3] = Color.green;
+        colorBox[4] = Color.cyan;
+        colorBox[5] = Color.magenta;
+        colorBox[6] = Color.white;
+        colorBox[7] = new Color(255,165,0); //Orange
+        if (letters == null)
+        {
+            letters = GameObject.FindGameObjectsWithTag("Letter");
+        }
+        foreach(GameObject letter in letters)
+        {
+            letter.gameObject.GetComponent<Text>().color = colorBox[Random.Range(0,8)];
+        }
         FadeMe();
     }
 }
