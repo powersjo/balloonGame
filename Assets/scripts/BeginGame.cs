@@ -8,7 +8,7 @@ public class BeginGame : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        time = 6;//UnityEngine.Random.Range(3F, 4F); 
+        time = 8f;//UnityEngine.Random.Range(3F, 4F); 
 	}
 	
 	// Update is called once per frame

@@ -4,8 +4,8 @@ using System;
 
 public class DummyBalloon : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         float temp1, temp2; //Use temp1 for y and temp2 for x. 
         temp1 = GetRandomScale();
         temp2 = temp1 - UnityEngine.Random.Range(0.0f, 0.5f);
@@ -13,7 +13,13 @@ public class DummyBalloon : MonoBehaviour {
         SphereCollider localCollider = transform.GetComponent<SphereCollider>();
         localCollider.radius = 0.75f; // using .75 cause that's what seems to work.
         //This code sets the color of the balloon. 
+        randomizeColor();
+    }
 
+    //Call this to radomize the color of the balloon after it has been created. 
+    public void randomizeColor()
+    {
+        DestroyImmediate(GetComponent<SpriteRenderer>());
         //This code will use sprites instead of changing the material color. 
         String[] balloonColors = new String[8];
         balloonColors[0] = "Balloon/Blue";
@@ -35,6 +41,7 @@ public class DummyBalloon : MonoBehaviour {
             //Who cares?
         }
     }
+
     private float GetRandomScale()
     {
         return UnityEngine.Random.Range(-.1F, 1.0F);

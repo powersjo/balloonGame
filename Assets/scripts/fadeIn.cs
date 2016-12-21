@@ -10,12 +10,12 @@ public class fadeIn : MonoBehaviour {
     {
         StartCoroutine(DoFade());
     }
-
+    //This IEnumerator does the actual fade in and out.
     IEnumerator DoFade()
     {
         CanvasGroup canvasgroup = GetComponent<CanvasGroup>();
         canvasgroup.interactable = false; //buttons and such can't be clicked
-        int divisor = 3;
+        int divisor = 4; //2 = 4 seconds, 3 = 6, 4 = 8 ... etc
         while (canvasgroup.alpha < 1)
         {
             canvasgroup.alpha += Time.deltaTime / divisor;

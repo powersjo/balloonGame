@@ -57,6 +57,20 @@ public class Balloon : MonoBehaviour {
         transform.localScale += new Vector3(temp2, temp1, 0);
         SphereCollider localCollider = transform.GetComponent<SphereCollider>();
         localCollider.radius = 0.75f; // using .75 cause that's what seems to work.
+        
+        //This code sets the color of the balloon. 
+        radomizeColor();
+    }
+
+    int getBackgroundNum()
+    {
+        GameObject go = GameObject.Find("Master");
+        CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
+        return other.GetBackNum();
+    }
+
+    public void radomizeColor()
+    {
         //This code sets the color of the balloon. 
 
         //This code will use sprites instead of changing the material color. 
@@ -70,10 +84,12 @@ public class Balloon : MonoBehaviour {
         balloonColors[6] = "Balloon/Purple";
         balloonColors[7] = "Balloon/Light-Blue";
         SpriteRenderer balloonSR = gameObject.AddComponent<SpriteRenderer>();
-        Sprite var = Resources.Load<Sprite>(balloonColors[UnityEngine.Random.Range(0,8)].ToString());
-        try {
+        Sprite var = Resources.Load<Sprite>(balloonColors[UnityEngine.Random.Range(0, 8)].ToString());
+        try
+        {
             balloonSR.sprite = var;
-        } catch (NullReferenceException e)
+        }
+        catch (NullReferenceException e)
         {
             //Who cares?
         }
@@ -82,50 +98,6 @@ public class Balloon : MonoBehaviour {
             gameObject.GetComponent<Renderer>().material.color = new Color(1.5F, 1.5F, 1.5F, 1.0F);
 
         }
-
-        /***
-        * This fucking works! just need to not apply the animation to the whole ballon and just the string????
-        ***/
-
-        //clone = (GameObject)Instantiate(Resources.Load<GameObject>("String"), new Vector3(0, 0, 0), this.transform.rotation);
-        //clone = new GameObject();
-        //clone.name = "String";
-        //clone.transform.position = this.transform.position;
-        //clone.transform.localPosition = new Vector3(0, 0, 0);
-        //clone.transform.parent = this.transform;
-        //transform.localScale = transform.localScale;
-        //anim = Resources.Load<Animation>("RopeAnimation") as Animation;
-        //Animation ropeAnimation = clone.AddComponent<Animation>() as Animation;
-        //Animator ropeAnimator = clone.AddComponent<Animator>() as Animator;
-        //Animation ropeAnimation = clone.AddComponent<Animation>() as Animation;
-        //GameObject tempGO = Resources.Load("Rope") as GameObject;
-        //ropeAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("RopeAnimator") as RuntimeAnimatorController;
-        //ropeAnimation.clip = Resources.Load<AnimationClip>("RopeAnimation") as AnimationClip;
-
-        /**
-        *   Next step is to make the animation correct. The animation is added correctly. 
-        **/
-
-        //clone.GetComponent<Animation>().Play();
-        //RuntimeAnimatorController RopeAnimator = clone.GetComponent<Animator>().GetComponent<RuntimeAnimatorController>();
-        //RopeAnimator = Resources.Load<RuntimeAnimatorController>("RopeAnimator") as RuntimeAnimatorController;
-        //clone.GetComponent<Animator>().GetComponent<RuntimeAnimatorController>().Equals(Resources.Load<RuntimeAnimatorController>("RopeAnimator") as RuntimeAnimatorController);
-        //RuntimeAnimatorController ropeAnimator = clone.GetComponent<Animator>();
-        //AnimationClip ropeClip = tempGO.animation.GetClip("animation");
-        //AnimationClip ropeClip = (AnimationClip)Resources.Load("RopeAnimation");
-        //ropeAnimation.AddClip(ropeClip, "ropeClip");
-        //ropeAnimation.Play(ropeAnimation.clip.name);
-        //ropeAnimation = clone.GetComponent<Animation>();
-        //ropeAnimation.AddClip((AnimationClip)Resources.Load("RopeAnimation"), "RopeAnimation");
-        //clone.GetComponent<Animation>().Play(clone.GetComponent<Animation>().clip.name);
-        //clone.transform.localPosition = new Vector3(0, 0, 0); /////////////////////////////////// rope is almost working need to get to the right spot. 
-    }
-
-    int getBackgroundNum()
-    {
-        GameObject go = GameObject.Find("Master");
-        CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
-        return other.GetBackNum();
     }
 
     public void killTime()
@@ -229,8 +201,7 @@ public class Balloon : MonoBehaviour {
     }*/
     // Update is called once per frame
     void Update () {
-        // if (this.GetComponentInChildren(Animation)) { }
-        //transform.localScale = transform.localScale;
+
         if (time >= 0 && (clone1 == null || clone2 == null)) {
 			time -= Time.deltaTime;
             if (!origonal)
