@@ -44,7 +44,7 @@ public class FirstSceneBalloon : MonoBehaviour {
 
 	void Start () {
         balloon = GameObject.Find("Balloon");
-        amount = 3; // Number of clones. 
+        amount = 1; // Number of clones. 
         //SpawnBaloons();
     }
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class GenerateBalloon : MonoBehaviour {
     void Start()
     {
-        InvokeRepeating("Generate", 0f, .5f);
+        InvokeRepeating("Generate", 0f, 1f);
     }
     void Generate()
     {
