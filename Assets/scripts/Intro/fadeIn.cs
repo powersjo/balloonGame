@@ -15,7 +15,15 @@ public class fadeIn : MonoBehaviour {
     {
         CanvasGroup canvasgroup = GetComponent<CanvasGroup>();
         canvasgroup.interactable = false; //buttons and such can't be clicked
-        int divisor = 4; //2 = 4 seconds, 3 = 6, 4 = 8 ... etc
+        GameObject dummy;
+        dummy = GameObject.Find("Main Camera");
+        
+        /*
+        * I am dividing by 2 because you have to fade in and fade out so time
+        * needs to be split for both instances of fading. 
+        */
+        int divisor = ((int)dummy.GetComponent<BeginGame>().getTime() / 2); //2 = 4 seconds, 3 = 6, 4 = 8 ... etc
+
         while (canvasgroup.alpha < 1)
         {
             canvasgroup.alpha += Time.deltaTime / divisor;

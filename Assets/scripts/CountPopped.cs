@@ -11,7 +11,7 @@ public class CountPopped : MonoBehaviour {
     private double beginTime, timer;
 	public GameObject but, but01, butExit, losePic, clickAccurate, options;
     private GameObject go;
-    private bool hasPlanet, fail, complete, lockAccuracy, pause;
+    private bool hasPlanet, fail, complete, lockAccuracy, pause, endless;
     private Profile other;
 
     // Use this for initialization
@@ -22,7 +22,7 @@ public class CountPopped : MonoBehaviour {
 		count = missed = totalClicks = 0;
         max = GetCurrentScene();
         start_click();
-        fail = complete = lockAccuracy = pause = false;
+        fail = complete = lockAccuracy = pause = endless = false;
         if(Application.loadedLevel == 11)
         {
             userHealth = 30;
@@ -48,6 +48,11 @@ public class CountPopped : MonoBehaviour {
     public void SetMissed(int value)
     {
         missed = value;
+    }
+
+    public void isEndless(bool x)
+    {
+        endless = x;
     }
 
     public void subUserHealth()
@@ -170,6 +175,20 @@ public class CountPopped : MonoBehaviour {
         options.SetActive(false); // Options button
     }
 
+    /**
+    * Use this public method to hide the gui in the case of 
+    * a non-standard level that does not count balloons the 
+    * normal way. 
+    **/
+    public void hideGuiButtons()
+    {
+        options.SetActive(false);
+        but.SetActive(false);
+        butExit.SetActive(false);
+        losePic.SetActive(false);
+        clickAccurate.SetActive(false);
+    }
+
     //For level ten win only
     bool GetLevel10()
     {
@@ -191,7 +210,7 @@ public class CountPopped : MonoBehaviour {
         {
             IncreaseClicks();
         }
-		if((missed + count) != max && !other.DidFail()){ //Did fail is a question, did we fail? If not, continue time. 
+		if(((missed + count) != max && !other.DidFail()) || endless ){ //Did fail is a question, did we fail? If not, continue time. 
             SetTime();
 		}
 		if (missed < 1) {

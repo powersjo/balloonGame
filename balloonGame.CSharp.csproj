@@ -70,7 +70,6 @@
     <Compile Include="Assets\scripts\AnimationVary.cs" />
     <Compile Include="Assets\scripts\Balloon.cs" />
     <Compile Include="Assets\scripts\BalloonMiniLvl10.cs" />
-    <Compile Include="Assets\scripts\BeginGame.cs" />
     <Compile Include="Assets\scripts\ButtonSprite.cs" />
     <Compile Include="Assets\scripts\ChangeDirection.cs" />
     <Compile Include="Assets\scripts\ChangeMusic.cs" />
@@ -79,18 +78,21 @@
     <Compile Include="Assets\scripts\CountPopped.cs" />
     <Compile Include="Assets\scripts\Cycle_background.cs" />
     <Compile Include="Assets\scripts\DummyBalloon.cs" />
-    <Compile Include="Assets\scripts\FirstSceneBalloon.cs" />
-    <Compile Include="Assets\scripts\GenerateBalloon.cs" />
+    <Compile Include="Assets\scripts\EndlessBalloon.cs" />
+    <Compile Include="Assets\scripts\GenBalloonEndless.cs" />
     <Compile Include="Assets\scripts\HideLvls.cs" />
+    <Compile Include="Assets\scripts\Intro\BeginGame.cs" />
+    <Compile Include="Assets\scripts\Intro\FirstSceneBalloon.cs" />
+    <Compile Include="Assets\scripts\Intro\GenerateBalloon.cs" />
+    <Compile Include="Assets\scripts\Intro\MusicStarted.cs" />
+    <Compile Include="Assets\scripts\Intro\fadeIn.cs" />
     <Compile Include="Assets\scripts\Level10.cs" />
     <Compile Include="Assets\scripts\LoadingScript.cs" />
     <Compile Include="Assets\scripts\MoveLights.cs" />
     <Compile Include="Assets\scripts\MusicControl.cs" />
-    <Compile Include="Assets\scripts\MusicStarted.cs" />
     <Compile Include="Assets\scripts\Profile.cs" />
     <Compile Include="Assets\scripts\checklost.cs" />
     <Compile Include="Assets\scripts\delayScript.cs" />
-    <Compile Include="Assets\scripts\fadeIn.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\SaveFiles\Save.txt" />

@@ -6,12 +6,12 @@ public class FirstSceneBalloon : MonoBehaviour {
     private int amount;
     
     //This mini class is just to move the clones. 
-    private class Move : MonoBehaviour { 
+    public class Move : MonoBehaviour { 
         float posy, posx, speed;
 
         void Start()
         {
-            posy = 5f;
+            posy = 6f;
             posx = Random.Range(-4f, 4f);
             speed = Random.Range(1f, 6f);
         }
@@ -60,10 +60,5 @@ public class FirstSceneBalloon : MonoBehaviour {
             clone[x].transform.parent = GameObject.Find("BalloonGroup").transform; //set the clone to be a child of the balloon group game object
             clone[x].AddComponent<Move>();
         }
-    }
-
-    // Update is called once per frame
-    void Update () {
-        
     }
 }

@@ -103,10 +103,20 @@ public class Choose_lvl : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        
+        //P is for pause the game
         if (Input.GetKeyDown("p"))
         {
-            SetLastLevel(Application.loadedLevel);
-            SceneManager.LoadScene(11);
+            //You should not be able to pause the game when you are not actively in a level. 
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("options") &&
+                SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Loading") &&
+                SceneManager.GetActiveScene() != SceneManager.GetSceneByName("LvlSelect") &&
+                SceneManager.GetActiveScene() != SceneManager.GetSceneByName("mainMenu") &&
+                SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MusicStart"))
+            {
+                SetLastLevel(Application.loadedLevel);
+                SceneManager.LoadScene("options");
+            }
         }
     }
     public void NextLevel()

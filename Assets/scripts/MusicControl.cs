@@ -21,7 +21,15 @@ public class MusicControl : MonoBehaviour {
 
     }
     void Start() {
-        time = 5.9f;
+        GameObject dummy;
+        dummy = GameObject.Find("Main Camera");
+
+        /*
+        * I want the music to start slightly before the intro 
+        * scene ends. 
+        */
+        time = dummy.GetComponent<BeginGame>().getTime() - .1f;
+
         mute = false;
         music = new string[5];
         music[0] = @"Music\techno";
