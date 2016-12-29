@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scenes/MusicStart.unity
+- path: Assets/scenes/endlessScene.unity
   isLoaded: 1
   isActive: 1

@@ -15,7 +15,7 @@ public class CloudBehavior : MonoBehaviour {
     {
         if (cloudNumber == 1)
         {
-            speed = Random.Range(0.2F, 2.0F);
+            speed = Random.Range(1.2F, 4.0F);
             posx = GetRandomXY(1);
             posy = GetRandomXY(0);
             targetPosition = new Vector3(posx, posy, -2);
@@ -30,11 +30,11 @@ public class CloudBehavior : MonoBehaviour {
     // y = 0, x = else
     private int GetRandomXY(int y_or_x)
     {
-        if (y_or_x == 0)
+        if (y_or_x == 0)  //y
         {
-            return Random.Range(-3, 1);
+            return Random.Range(1, 5);
         }
-        else
+        else  //x
         {
             return Random.Range(-2, 2);
         }
