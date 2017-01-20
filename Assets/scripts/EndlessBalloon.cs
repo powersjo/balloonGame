@@ -10,12 +10,14 @@ public class EndlessBalloon : MonoBehaviour {
     public class Move : MonoBehaviour
     {
         float posy, posx, speed;
+        //public AudioSource pop;
 
         void Start()
         {
             posy = 10f; //How high does the balloon go?
             posx = Random.Range(-4f, 4f);
             speed = Random.Range(1f, 6f);
+            //pop = (AudioSource)gameObject.AddComponent<AudioSource>();
         }
 
         void Update()
@@ -40,9 +42,15 @@ public class EndlessBalloon : MonoBehaviour {
             }
             else
             {
+                GameObject go = GameObject.Find("Master");
+                CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
+                other.IncreaseMissed();
+                Debug.Log("increase missed" + Time.deltaTime.ToString());
                 Destroy(gameObject);
             }
+
         }
+        
     }
 
     // Use this for initialization
@@ -64,10 +72,13 @@ public class EndlessBalloon : MonoBehaviour {
 
         for (int x = 0; x < amount; x++)
         {
+            GameObject go = GameObject.Find("Master");
+            go.GetComponent<GenBalloonEndless>().addToBalloonTracker(1);
             clone[x] = Instantiate(balloon, new Vector3(balloon.transform.position.x + (Random.Range(-4f, 4f)), balloon.transform.position.y, 0), balloon.transform.rotation) as GameObject;
             clone[x].GetComponentInChildren<DummyBalloon>().randomizeColor();
             clone[x].transform.parent = GameObject.Find("Master").transform; //set the clone to be a child of the balloon group game object
             clone[x].AddComponent<Move>();
+            clone[x].gameObject.name = "Balloon" + go.GetComponent<GenBalloonEndless>().getBalloonNum();
         }
     }
 }

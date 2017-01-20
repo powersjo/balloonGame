@@ -4,6 +4,8 @@ using System;
 
 public class DummyBalloon : MonoBehaviour {
 
+    public AudioSource pop;
+
     // Use this for initialization
     void Start () {
         float temp1, temp2; //Use temp1 for y and temp2 for x. 
@@ -14,6 +16,7 @@ public class DummyBalloon : MonoBehaviour {
         localCollider.radius = 0.75f; // using .75 cause that's what seems to work.
         //This code sets the color of the balloon. 
         randomizeColor();
+        pop = (AudioSource)gameObject.AddComponent<AudioSource>();
     }
 
     //Call this to radomize the color of the balloon after it has been created. 
@@ -40,6 +43,18 @@ public class DummyBalloon : MonoBehaviour {
         {
             //Who cares?
         }
+    }
+
+    void OnMouseDown()
+    {
+        GameObject go = GameObject.Find("Master");
+        CountPopped other = (CountPopped)go.GetComponent(typeof(CountPopped));
+        other.IncreaseCount();
+        AudioClip myAudioClip;
+        myAudioClip = (AudioClip)Resources.Load("Pop Banner");
+        pop.clip = myAudioClip;
+        AudioSource.PlayClipAtPoint(pop.clip, transform.position);
+        Destroy(this.gameObject);
     }
 
     private float GetRandomScale()
