@@ -23,13 +23,6 @@ public class Balloon : MonoBehaviour {
         unclickable = duplicate = false;
         posz = 0.0f;//UnityEngine.Random.Range(-0.2F, 0.5F);
         cloneMe = Resources.Load<GameObject>("Rope") as GameObject; //problem
-        //cloneMe.AddComponent<Animator>();
-        //cloneMe.AddComponent<Animation>();
-        //anim = Resources.Load<Animation>("RopeAnimation") as Animation;
-        
-        
-        //anim.animation = Resources.Load<Animation>("RopeAnimation") as Animation;
-        //cloneMe.GetComponent<Animation>() = Resources.Load<Animation>("RopeAnimation") as Animation;
         armored = false;
         if (UnityEngine.Random.Range(0, (16 - Application.loadedLevel)) == 0 && Application.loadedLevel > 7)
         {
@@ -193,13 +186,7 @@ public class Balloon : MonoBehaviour {
 	float GetRandomTime(){
 		return UnityEngine.Random.Range (1.0F, 5.0F + (Application.loadedLevel * 5));
 	}
-    /*public static void MyDelay(int seconds)
-    {
-        DateTime ts = DateTime.Now + TimeSpan.FromSeconds(seconds);
 
-        do { } while (DateTime.Now < ts);
-    }*/
-    // Update is called once per frame
     void Update () {
 
         if (time >= 0 && (clone1 == null || clone2 == null)) {

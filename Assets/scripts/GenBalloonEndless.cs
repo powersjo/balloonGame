@@ -15,7 +15,7 @@ public class GenBalloonEndless : MonoBehaviour {
         dummy.GetComponent<CountPopped>().isEndless(true);
         begin = Random.Range(.1f, 1f);
         interval = Random.Range(2f, 6f);
-        InvokeRepeating("Generate", begin, interval);
+        InvokeRepeating("InvokeParent", begin, 30f); // every 30 seconds invoke another invoke repeating generation of balloons. 
     }
     
     public int getBalloonNum()
@@ -27,14 +27,25 @@ public class GenBalloonEndless : MonoBehaviour {
     {
         tracker = tracker + i;
     }
+
+    void InvokeParent()
+    {
+        InvokeRepeating("Generate", begin, interval);
+    }
+
     void Generate()
     {
         /* 
         * Maybe use time on the high end of the range to
         * scale the endless scene. 10 second intervals? 
+        * 30 second intervals. <<<
         */ 
         amount = Random.Range(1, 4);
         dummy.GetComponent<EndlessBalloon>().setAmount(amount);
         dummy.GetComponent<EndlessBalloon>().SpawnBaloons();
+    }
+    void Update()
+    {
+
     }
 }

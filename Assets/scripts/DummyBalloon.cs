@@ -54,6 +54,7 @@ public class DummyBalloon : MonoBehaviour {
         myAudioClip = (AudioClip)Resources.Load("Pop Banner");
         pop.clip = myAudioClip;
         AudioSource.PlayClipAtPoint(pop.clip, transform.position);
+        Destroy(transform.parent.gameObject);
         Destroy(this.gameObject);
     }
 

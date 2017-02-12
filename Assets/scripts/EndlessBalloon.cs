@@ -10,14 +10,12 @@ public class EndlessBalloon : MonoBehaviour {
     public class Move : MonoBehaviour
     {
         float posy, posx, speed;
-        //public AudioSource pop;
 
         void Start()
         {
             posy = 10f; //How high does the balloon go?
             posx = Random.Range(-4f, 4f);
             speed = Random.Range(1f, 6f);
-            //pop = (AudioSource)gameObject.AddComponent<AudioSource>();
         }
 
         void Update()
